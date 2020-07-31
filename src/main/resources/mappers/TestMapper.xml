@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mapper namespace="net.mobon.externalbatch.mapper.TestMapper">
+    <sql id="testColums">
+        idx
+        ,title
+        ,content
+        ,writer
+        ,view_cnt
+        ,notice_yn
+        ,secret_yn
+        ,delete_yn
+        ,insert_time
+        ,update_time
+        ,delete_time
+    </sql>
+    <insert id="insertTest" parameterType="TestDto">
+        INSERT INTO tb_board (
+                <include refid="testColums"/>
+        ) VALUES (
+            #{idx}
+        ,   #{title}
+        ,   #{content}
+        ,   #{writer}
+        ,   0
+        ,   IFNULL(#{noticeYn}, 'N')
+        ,   IFNULL(#{secretYn}, 'N')
+        ,   'N'
+        ,   NOW()
+        ,   NULL
+        ,   NULL
+        )
+    </insert>
+    <select id="selectTest" parameterType="long" resultType="TestDto">
+        SELECT
+            <include refid="testColums"/>
+        FROM
+            tb_board
+        AND
+            idx = #{idx}
+    </select>
+    <update id="updateTest" parameterType="TestDto">
+        UPDATE
+            tb_board
+        SET
+            update_time = NOW()
+        ,   title = #{title}
+        ,   content = #{content}
+        ,   writer = #{writer}
+        ,   notice_yn = IFNULL(#{noticeYn}, 'N')
+        ,   secret_yn = IFNULL(#{secretYn}, 'N')
+        WHERE
+            idx = #{idx}
+    </update>
+    <update id="deleteTest" parameterType="long">
+        UPDATE
+            tb_board
+        SET
+            delete_yn = 'Y'
+        ,   delete_time = NOW()
+        WHERE
+            idx = #{idx}
+    </update>
+    <select id="selectTestList" parameterType="TestDto" resultType="TestDto">
+        SELECT
+            <include refid="testColums"/>
+        FROM
+            tb_board
+        WHERE
+            delete_yn = 'N'
+        ORDER BY
+            notice_yn ASC
+        ,   idx DESC
+        ,   insert_time DESC
+    </select>
+    <select id="selectTestTotalCount" parameterType="TestDto" resultType="int">
+        SELECT
+            COUNT(*)
+        FROM
+            tb_board
+        WHERE
+            delete_yn = 'N'
+    </select>
+</mapper>
