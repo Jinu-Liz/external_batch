@@ -2,12 +2,12 @@ package net.mobon.externalbatch.mapper;
 
 import net.mobon.externalbatch.dto.TestDto;
 import org.apache.ibatis.annotations.Mapper;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Mapper
-@Component
+@Repository
 public interface TestMapper {
 
   public int insertTest(TestDto params);
@@ -20,6 +20,6 @@ public interface TestMapper {
 
   public List<TestDto> selectTestList();
 
-  public int selectBoardTotalCount();
+  public int selectTestTotalCount();
 
 }
