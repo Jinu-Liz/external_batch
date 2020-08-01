@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="net.mobon.externalbatch.mapper.TestMapper">
     <sql id="testColums">
         idx
@@ -14,7 +14,7 @@
         ,update_time
         ,delete_time
     </sql>
-    <insert id="insertTest" parameterType="TestDto">
+    <insert id="insertTest" parameterType="net.mobon.externalbatch.dto.TestDto">
         INSERT INTO tb_board (
                 <include refid="testColums"/>
         ) VALUES (
@@ -31,7 +31,7 @@
         ,   NULL
         )
     </insert>
-    <select id="selectTest" parameterType="long" resultType="TestDto">
+    <select id="selectTest" parameterType="long" resultType="net.mobon.externalbatch.dto.TestDto">
         SELECT
             <include refid="testColums"/>
         FROM
@@ -39,7 +39,7 @@
         AND
             idx = #{idx}
     </select>
-    <update id="updateTest" parameterType="TestDto">
+    <update id="updateTest" parameterType="net.mobon.externalbatch.dto.TestDto">
         UPDATE
             tb_board
         SET
@@ -61,7 +61,7 @@
         WHERE
             idx = #{idx}
     </update>
-    <select id="selectTestList" parameterType="TestDto" resultType="TestDto">
+    <select id="selectTestList" parameterType="net.mobon.externalbatch.dto.TestDto" resultType="net.mobon.externalbatch.dto.TestDto">
         SELECT
             <include refid="testColums"/>
         FROM
@@ -73,12 +73,15 @@
         ,   idx DESC
         ,   insert_time DESC
     </select>
-    <select id="selectTestTotalCount" parameterType="TestDto" resultType="int">
+    <select id="selectTestTotalCount" parameterType="net.mobon.externalbatch.dto.TestDto" resultType="int">
         SELECT
             COUNT(*)
         FROM
             tb_board
         WHERE
             delete_yn = 'N'
+    </select>
+    <select id="selectBoardTotalCount" resultType="java.lang.Integer">
+        select * from null
     </select>
 </mapper>
