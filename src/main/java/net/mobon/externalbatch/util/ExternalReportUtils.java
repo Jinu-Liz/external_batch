@@ -3,12 +3,13 @@ package net.mobon.externalbatch.util;
 import net.mobon.externalbatch.dto.ExternalLinkageDto;
 import net.mobon.externalbatch.mapper.ExternalMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+@Service
 public class ExternalReportUtils {
 
   @Autowired

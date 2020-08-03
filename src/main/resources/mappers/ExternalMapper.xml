@@ -16,23 +16,11 @@
         FROM EXL_ITL_INFO exl
         JOIN media_script ms ON exl.PAR_NO = ms.no
         WHERE 1=1
-        <if test="type == ''">
             AND USE_YN = 'Y'
-        </if>
-        <if test="send_tp_code != ''">
-            AND SEND_TP_CODE = #{send_tp_code}
-        </if>
-        <if test="externalId != ''">
-            AND EXL_ITL_ID = #{externalId}
-        </if>
-        <if test="scriptNo != ''">
-            AND PAR_NO = #{scriptNo}
-        </if>>
-        <if test="zoneid != ''">
-            AND EXL_ITL_KEY = #{zoneid}
-        </if>
-        GROUP BY EXL_ITL_KEY
-
+            AND SEND_TP_CODE = '02'
+            AND EXL_ITL_ID = 'nitmuss'
+            AND PAR_NO = '359787'
+            AND EXL_ITL_KEY = 'u5SVjsNh'
     </select>
     <select id="selectTest" parameterType="String" resultType="String">
         SELECT PAR_NO

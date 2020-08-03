@@ -15,6 +15,9 @@ public class MapperTests {
   @Autowired
   private ExternalMapper externalMapper;
 
+  @Autowired
+  private ExternalReportUtils utils;
+
   @Test
   public void externalMatchList() {
     String zoneid = "u5SVjsNh";
@@ -25,7 +28,6 @@ public class MapperTests {
 
   @Test
   public void externalist() {
-    ExternalReportUtils utils = new ExternalReportUtils();
     String externalId = "nitmuss";
     String zoneid = "u5SVjsNh";
     ArrayList<ExternalLinkageDto> list = utils.externalMatchList(externalId, zoneid, 0);
