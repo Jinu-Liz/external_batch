@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.mobon.externalbatch.mapper.ExternalMapper">
+<!--    <typeAlias alias="hmap" type="java.util.HashMap"/>-->
+<!--    <typeAlias alias="externalInfo" type="com.adgather.reportmodel.ExternalLinkageData"/>-->
+<!--    <typeAlias alias="rsInfo" type="com.mobon.report.domain.ReportStatsInfo"/>-->
+
+    <select id="selectExternalMatch" resultType="net.mobon.externalbatch.dto.ExternalLinkageDto" parameterType="java.util.HashMap" >
+        SELECT  EXL_ITL_SEQ exl_seq,
+        ms.mediasite_no media_site,
+        PAR_NO media_code,
+        EXL_ITL_KEY zoneid,
+        MEDIA_ID userid,
+        EXL_ITL_ADDITION exl_info,
+        EXL_ITL_ID as external_id
+        FROM EXL_ITL_INFO exl
+        JOIN media_script ms ON exl.PAR_NO = ms.no
+        WHERE 1=1
+        <if test="type == ''">
+            AND USE_YN = 'Y'
+        </if>
+        <if test="send_tp_code != ''">
+            AND SEND_TP_CODE = #{send_tp_code}
+        </if>
+        <if test="externalId != ''">
+            AND EXL_ITL_ID = #{externalId}
+        </if>
+        <if test="scriptNo != ''">
+            AND PAR_NO = #{scriptNo}
+        </if>>
+        <if test="zoneid != ''">
+            AND EXL_ITL_KEY = #{zoneid}
+        </if>
+        GROUP BY EXL_ITL_KEY
+
+    </select>
+    <select id="selectTest" parameterType="String" resultType="String">
+        SELECT PAR_NO
+        FROM EXL_ITL_INFO
+        <if test="zoneid != ''">
+        WHERE EXL_ITL_KEY = #{zoneid}
+        </if>
+    </select>
+</mapper>

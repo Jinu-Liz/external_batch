@@ -1,25 +1,37 @@
 package net.mobon.externalbatch;
 
-import net.mobon.externalbatch.dto.TestDto;
-import net.mobon.externalbatch.mapper.TestMapper;
+import net.mobon.externalbatch.dto.ExternalLinkageDto;
+import net.mobon.externalbatch.mapper.ExternalMapper;
+import net.mobon.externalbatch.util.ExternalReportUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.ArrayList;
 
 @SpringBootTest
 public class MapperTests {
 
   @Autowired
-  private TestMapper testMapper;
+  private ExternalMapper externalMapper;
 
   @Test
-  public void testOfInsert() {
-    TestDto params = new TestDto();
-    params.setTitle("1번 게시글 제목");
-    params.setContent("1번 게시글 내용");
-    params.setWriter("테스터");
+  public void externalMatchList() {
+    String zoneid = "u5SVjsNh";
+    String snum = externalMapper.selectTest(zoneid);
 
-    int result = testMapper.insertTest(params);
-    System.out.println("결과는 " + result + "입니다.");
+    System.out.println("snum : " + snum);
+  }
+
+  @Test
+  public void externalist() {
+    ExternalReportUtils utils = new ExternalReportUtils();
+    String externalId = "nitmuss";
+    String zoneid = "u5SVjsNh";
+    ArrayList<ExternalLinkageDto> list = utils.externalMatchList(externalId, zoneid, 0);
+
+    for (ExternalLinkageDto dto : list) {
+      System.out.println("snum : " + dto.getMedia_code());
+    }
   }
 }
