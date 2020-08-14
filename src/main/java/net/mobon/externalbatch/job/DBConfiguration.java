@@ -38,8 +38,9 @@ public class DBConfiguration {
     SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
     sqlSessionFactoryBean.setDataSource(dataSource());
     sqlSessionFactoryBean.setMapperLocations(applicationContext.getResources("classpath:/mappers/**/*Mapper.xml"));
+    sqlSessionFactoryBean.setConfigLocation(applicationContext.getResource("classpath:/config/mybatisConfig.xml"));
     sqlSessionFactoryBean.setTypeAliasesPackage("net.mobon.externalbatch");
-    sqlSessionFactoryBean.setConfiguration(mybatisConfig());
+//    sqlSessionFactoryBean.setConfiguration(mybatisConfig());
     return sqlSessionFactoryBean.getObject();
   }
 

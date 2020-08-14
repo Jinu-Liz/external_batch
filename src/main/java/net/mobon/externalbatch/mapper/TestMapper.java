@@ -4,6 +4,7 @@ import net.mobon.externalbatch.dto.TestDto;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
 import java.util.List;
 
 @Mapper
@@ -21,5 +22,7 @@ public interface TestMapper {
   public List<TestDto> selectTestList();
 
   public int selectTestTotalCount();
+
+  public List<TestDto> selectListWithHashMap(HashMap<String, String> filter);
 
 }

@@ -14,7 +14,7 @@
         ,update_time
         ,delete_time
     </sql>
-    <insert id="insertTest" parameterType="net.mobon.externalbatch.dto.TestDto">
+    <insert id="insertTest" parameterType="testDto">
         INSERT INTO tb_board (
                 <include refid="testColums"/>
         ) VALUES (
@@ -31,15 +31,17 @@
         ,   NULL
         )
     </insert>
-    <select id="selectTest" parameterType="long" resultType="net.mobon.externalbatch.dto.TestDto">
+    <select id="selectTest" parameterType="long" resultType="testDto">
         SELECT
             <include refid="testColums"/>
         FROM
             tb_board
+        WHERE
+            delete_yn = 'N'
         AND
             idx = #{idx}
     </select>
-    <update id="updateTest" parameterType="net.mobon.externalbatch.dto.TestDto">
+    <update id="updateTest" parameterType="testDto">
         UPDATE
             tb_board
         SET
@@ -61,7 +63,7 @@
         WHERE
             idx = #{idx}
     </update>
-    <select id="selectTestList" parameterType="net.mobon.externalbatch.dto.TestDto" resultType="net.mobon.externalbatch.dto.TestDto">
+    <select id="selectTestList" parameterType="testDto" resultType="testDto">
         SELECT
             <include refid="testColums"/>
         FROM
@@ -73,7 +75,7 @@
         ,   idx DESC
         ,   insert_time DESC
     </select>
-    <select id="selectTestTotalCount" parameterType="net.mobon.externalbatch.dto.TestDto" resultType="int">
+    <select id="selectTestTotalCount" parameterType="testDto" resultType="int">
         SELECT
             COUNT(*)
         FROM
@@ -83,5 +85,19 @@
     </select>
     <select id="selectBoardTotalCount" resultType="java.lang.Integer">
         select * from null
+    </select>
+    <select id="selectListWithHashMap" parameterType="hashMap" resultType="testDto">
+        SELECT
+            <include refid="testColums"/>
+        FROM
+            tb_board
+        WHERE
+            delete_yn = 'N'
+        AND
+            writer = #{writer}
+        ORDER BY
+            notice_yn ASC
+            ,   idx DESC
+            ,   insert_time DESC
     </select>
 </mapper>
