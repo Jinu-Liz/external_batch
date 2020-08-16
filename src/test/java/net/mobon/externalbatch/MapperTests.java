@@ -111,7 +111,7 @@ public class MapperTests {
   }
 
   @Test
-  public void selectListWithHashMap() {
+  public void selectListWithHashMap() throws Exception {
     HashMap<String, String> hashMap = new HashMap<>();
     hashMap.put("writer","홍길동");
     List<TestDto> list = testMapper.selectListWithHashMap(hashMap);

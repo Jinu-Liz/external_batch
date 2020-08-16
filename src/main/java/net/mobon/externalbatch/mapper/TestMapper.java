@@ -23,6 +23,6 @@ public interface TestMapper {
 
   public int selectTestTotalCount();
 
-  public List<TestDto> selectListWithHashMap(HashMap<String, String> filter);
+  public List<TestDto> selectListWithHashMap(HashMap<String, String> filter) throws Exception;
 
 }

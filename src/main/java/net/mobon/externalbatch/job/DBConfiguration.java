@@ -19,6 +19,7 @@ import javax.sql.DataSource;
 @Configuration
 @PropertySource("classpath:/application.properties")
 public class DBConfiguration {
+
   @Autowired
   private ApplicationContext applicationContext;
 
@@ -40,18 +41,11 @@ public class DBConfiguration {
     sqlSessionFactoryBean.setMapperLocations(applicationContext.getResources("classpath:/mappers/**/*Mapper.xml"));
     sqlSessionFactoryBean.setConfigLocation(applicationContext.getResource("classpath:/config/mybatisConfig.xml"));
     sqlSessionFactoryBean.setTypeAliasesPackage("net.mobon.externalbatch");
-//    sqlSessionFactoryBean.setConfiguration(mybatisConfig());
     return sqlSessionFactoryBean.getObject();
   }
 
   @Bean
   public SqlSessionTemplate sqlSessionTemplate() throws Exception {
     return new SqlSessionTemplate(sqlSessionFactory());
-  }
-
-  @Bean
-  @ConfigurationProperties(prefix = "mybatis.configuration")
-  public org.apache.ibatis.session.Configuration mybatisConfig() {
-    return new org.apache.ibatis.session.Configuration();
   }
 }
