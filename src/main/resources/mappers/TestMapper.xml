@@ -6,13 +6,13 @@
         ,title
         ,content
         ,writer
-        ,view_cnt as viewCnt
-        ,notice_yn as noticeYn
-        ,secret_yn as secretYn
-        ,delete_yn as deleteYn
-        ,insert_time as insertTime
-        ,update_time as updateTime
-        ,delete_time as deleteTime
+        ,view_cnt
+        ,notice_yn
+        ,secret_yn
+        ,delete_yn
+        ,insert_time
+        ,update_time
+        ,delete_time
     </sql>
     <insert id="insertTest" parameterType="testDto">
         INSERT INTO tb_board (
